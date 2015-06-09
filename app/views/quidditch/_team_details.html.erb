@@ -1,0 +1,19 @@
+<table class="table table-bordered" style="float: left">
+    <% i = 0 %>
+    <caption><%= team.name + "[  #{score}  ]"%></caption>
+    <tbody>
+    <tr style="text-align:center; height: 35px">
+      <th ><b>Sno</b></th>
+      <th ><b>Name</b></th>
+      <th ><b>Status</b></th>
+    </tr>
+    <% team.players.each do |p| %>
+        <tr>
+          <td><%= i+=1 %></td>
+          <td><%= p.name %><%= " (captain)" if @match.team1.captain_id == p.id %></td>
+          <td><%= p.status %></td>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>`

@@ -1,0 +1,42 @@
+<style>
+    .div_partition
+    {
+        float:left;
+        width: 40%;
+        /*background: lightgrey;*/
+        text-align: center;
+    }
+</style>
+<% if @match.present? %>
+    <div style="background-color: red;border: solid black 2px;">
+        <div class="div_partition">
+        <%= render :partial=>"team_details", :locals=>{:team=>@match.team1,:score=>@match.team1_score} %>
+        </div>
+          <div class="div_partition" style="float: right">
+        <%= render :partial=>"team_details", :locals=>{:team=>@match.team2,:score=>@match.team2_score} %>
+          </div>
+    </div>
+
+      <table class="table table-striped">
+        <caption>Match Summary</caption>
+        <tbody>
+        <tr style="text-align:center; height: 35px">
+          <th ><b>Time</b></th>
+          <th ><b>Player</b></th>
+          <th ><b>event</b></th>
+          <th ><b>event</b></th>
+        </tr>
+        <% @events.each do |e| %>
+            <tr>
+              <td><%= e.created_at.strftime('%d-%b-%Y at %I:%M%p')%></td>
+              <td><%= e.player.name%></td>
+              <td><%= e.event%></td>
+              <td><%= "#{e.team1_score}/#{e.team2_score}" %></td>
+
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>`
+    </div>
+<% end %>

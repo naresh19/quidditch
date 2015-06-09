@@ -1,0 +1,31 @@
+
+
+<% if @matches.present? %>
+    <table class="table table-striped">
+      <caption><strong>Matches</strong></caption>
+      <tbody>
+      <tr style="text-align:center; height: 35px">
+        <th ><b>Match Id</b></th>
+        <th ><b>Team 1</b></th>
+        <th ><b>Team 2</b></th>
+        <th ><b>Score</b></th>
+        <th ><b>Status</b></th>
+        <th ><b>Date</b></th>
+        <th ><b>Simulate</b></th>
+      </tr>
+      <% @matches.each do |m| %>
+          <tr>
+            <td><%= link_to "#{m.id}", :controller => "quidditch", :action => "match_details", :match_id=>m.id %></td>
+            <td><%= m.team1.name %></td>
+            <td><%= m.team2.name %></td>
+            <td><%= "#{m.team1_score}/#{m.team2_score}" %></td>
+            <td><%= m.status %></td>
+            <td><%= m.created_at.strftime('%d-%b-%Y') %></td>
+            <td ><%= link_to "Start", :controller => "quidditch", :action => "simulate",:match_id=>m.id  if m.started?%></td>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% end %>
+

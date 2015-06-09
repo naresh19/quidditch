@@ -1,0 +1,34 @@
+<script>
+    function validate_args()
+    {
+        if(type=$('#ball').val().length==0)
+        {
+            alert("Please Select a ball type");
+            return false;
+        }
+        else if($('#player_id').val().length==0)
+        {
+            alert("Please Select a player");
+            return false;
+        }
+    }
+</script>
+    <%= form_tag ('/quidditch/process_event') do %>
+        <table class="table table-striped">
+          <tbody>
+          <caption>
+            <strong>Simulate </strong>
+          </caption>
+          <tr>
+            <td><%= label_tag("Ball : ") %></td>
+            <td><%=select_tag "ball", options_for_select(["Bludger","Quaffle","Snitch","Reset"]),:prompt => "Select Type" %></td>
+            <td><%= label_tag("Player :") %></td>
+            <td ><%= select_tag "player_id",options_for_select(@players.map{|p| [p.name,p.id]}),:prompt => "Select Type"%></td>
+            <%= hidden_field_tag :match_id, params[:match_id], {:class => 'nameField input-medium', :id => 'stt_missing'} %>
+          </tr>
+          <tr>
+            <td colspan="6"><%= submit_tag "Submit", { :class=>'btn btn-info btn-small', :id => 'submit',:onclick=>'return validate_args()'} %></td>
+          </tr>
+          </tbody>
+        </table>
+    <% end %>
